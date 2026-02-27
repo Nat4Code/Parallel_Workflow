@@ -1,0 +1,3 @@
+RUN_HEADER task_id=13 seed=1013 timestamp_utc=2026-02-26T23:48:36Z hostname=clr1450
+[task 13] tile=(1,3) start_f=9.973920 best_f=9.272922 best_xy=(-0.008302,2.976504) -> results/task_00013.json
+Completed task 13

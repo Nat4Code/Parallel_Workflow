@@ -2,6 +2,7 @@
 import argparse
 import json
 import math
+import sys
 import os
 import random
 from dataclasses import dataclass
@@ -75,7 +76,7 @@ def reflect_into_box(x: float, lo: float, hi: float) -> float:
 
 def tile_bounds(task_id: int, nx: int, ny: int, xlo: float, xhi: float, ylo: float, yhi: float):
     if task_id < 0 or task_id >= nx * ny:
-        raise ValueError(f"task_id={task_id} out of range for nx*ny={nx*ny}")
+        raise ValueError(f"task_id {task_id} out of range for nx={nx}, ny={ny}")
     ix = task_id % nx
     iy = task_id // nx
     dx = (xhi - xlo) / nx
@@ -168,6 +169,12 @@ def main():
 
     # task id: prefer arg, else SLURM
     tid = args.task_id
+
+    if tid < 0 or tid >= args.nx * args.ny:
+        print(f"ERROR: task_id out of range! task_id={tid} out of range for nx*ny={args.nx*args.ny}")
+        print("Exiting with code 42 to indicate specific failure...")
+        sys.exit(42)  # non-zero exit code to indicate failure
+        
     if tid is None:
         tid_env = os.environ.get("SLURM_ARRAY_TASK_ID")
         if tid_env is None:

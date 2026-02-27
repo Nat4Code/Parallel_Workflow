@@ -1,0 +1,15 @@
+RUN_HEADER task_id=12 seed=1012 timestamp_utc=2026-02-26T23:48:36Z hostname=clr1450
+
+Causing intentional failure:
+We set TID to 100 which is out of bounds for our 4x4 grid (max index 15).
+Demonstrates workflow error handling using an explicit sanity-check trigger.
+Our Python handles this with a ValueError and exits before wasting compute units.
+
+To fix this, either remove the intentional failure block in run_worker.py
+...or skip this task in the sweep.sbatch array definition
+ (e.g., sbatch --array=0-11,13-15 sweep.sbatch).
+
+To rerun the task, use: sbatch --array=12 sweep.sbatch
+
+ERROR: task_id out of range! task_id=100 out of range for nx*ny=16
+Exiting with code 42 to indicate specific failure...

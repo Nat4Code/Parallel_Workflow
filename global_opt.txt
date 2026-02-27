@@ -1,0 +1,11 @@
+Scanned 16 result files in: results
+
+=== GLOBAL MIN (best objective) ===
+task_id=5 tile=(1,1) f=0.0337151696119 xy=(-0.00956725837559,-0.00927066878855)
+file: results/task_00005.json
+
+=== GLOBAL MAX (worst objective) ===
+task_id=15 tile=(3,3) f=18.6081684404 xy=(2.98612729971,2.98612729972)
+file: results/task_00015.json
+
+wrote: best_results.csv
